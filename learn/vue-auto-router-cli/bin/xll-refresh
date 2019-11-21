@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+const program=require('commander')
+const symbols=require('log-symbols')
+const chalk=require('chalk')
+
+program.action(()=>{
+    console.log('refresh...')
+})
+
+program.parse(process.argv)
+
+const fs=require('fs')
+const handlebars=require('handlebars')  // 模版渲染
+
+const list = fs.readdirSync('./src/views')
