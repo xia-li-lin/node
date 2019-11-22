@@ -24,6 +24,20 @@ const app = http.createServer((req, res) => {
         //     'Access-Control-Allow-Methods': 'PUT'
         // });
         res.end();
+    }else if(method=='POST' && url=='/api/save'){   // 通过流进行输出
+        let reqData=[]
+        let size=0
+        req.on('data',data=>{
+            console.log('------------------>req on data',data)
+            reqData.push(data)
+            size+=data.length
+        })
+        req.on('end',()=>{
+            console.log('----------------->end')
+            const data=Buffer.concat(reqData,size)
+            console.log('data:',size,data.toString())
+            res.end(`formData:${data.toString()}`)
+        })
     }
 })
 
